@@ -1,0 +1,22 @@
+08:50:58 **** Incremental Build of configuration Debug for project AID_PRS_CB_V1_MUL_Z4_1 ****
+make -j16 all 
+Building file: ../src/main_Z4_1.c
+Invoking: Standard S32DS C Compiler
+powerpc-eabivle-gcc "@src/MPC57xx__Interrupt_Init.args" -MMD -MP -MF"src/main_Z4_1.d" -MT"src/main_Z4_1.o" -o "src/main_Z4_1.o" "../src/main_Z4_1.c"
+Finished building: ../src/main_Z4_1.c
+ 
+Building target: AID_PRS_CB_V1_MUL_Z4_1.elf
+Invoking: Standard S32DS C Linker
+powerpc-eabivle-gcc -o "AID_PRS_CB_V1_MUL_Z4_1.elf" "@AID_PRS_CB_V1_MUL_Z4_1.args"    
+Finished building target: AID_PRS_CB_V1_MUL_Z4_1.elf
+ 
+Invoking: Standard S32DS Create Flash Image
+Invoking: Standard S32DS Print Size
+powerpc-eabivle-objcopy -O srec AID_PRS_CB_V1_MUL_Z4_1.elf  "AID_PRS_CB_V1_MUL_Z4_1.srec"
+powerpc-eabivle-size --format=berkeley AID_PRS_CB_V1_MUL_Z4_1.elf
+   text	   data	    bss	    dec	    hex	filename
+ 108854	     60	   6728	 115642	  1c3ba	AID_PRS_CB_V1_MUL_Z4_1.elf
+Finished building: AID_PRS_CB_V1_MUL_Z4_1.siz
+ 
+Finished building: AID_PRS_CB_V1_MUL_Z4_1.srec
+ 

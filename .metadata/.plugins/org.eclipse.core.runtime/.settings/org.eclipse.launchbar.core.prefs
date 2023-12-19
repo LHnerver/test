@@ -1,0 +1,7 @@
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z2_2_Debug,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z2_2_Debug_RAM,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_LaunchGroup,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_LaunchGroup_RAM,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z4_0_Debug_RAM,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z4_1_Debug,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z4_1_Debug_RAM,org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z4_0_Debug
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z2_2_Debug/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z2_2_Debug/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:AID_PRS_CB_V1_MUL_Z4_0_Debug/activeLaunchMode=flash

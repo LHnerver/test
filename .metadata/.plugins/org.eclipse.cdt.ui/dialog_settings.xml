@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="${workspace_loc:/${ProjName}/include}" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
+	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
+		<item value="820" key="DIALOG_WIDTH"/>
+		<item value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI" key="DIALOG_FONT_NAME"/>
+		<item value="575" key="DIALOG_HEIGHT"/>
+		<item value="589" key="DIALOG_X_ORIGIN"/>
+		<item value="120" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+	<section name="PDOMSearchPage">
+		<item value="false" key="caseSensitive"/>
+		<item value="227191" key="searchFlags"/>
+		<list key="previousPatterns">
+			<item value="ep_zero_valid"/>
+			<item value="time_count"/>
+			<item value="ep_info"/>
+			<item value="ROBOT_INFO"/>
+			<item value="limit_time_count"/>
+			<item value="change_mode_st"/>
+			<item value="191"/>
+			<item value="CALI_DATA"/>
+			<item value="flash_get_cali_data"/>
+			<item value="ep_encoder_up_valid"/>
+			<item value="p_cali_data"/>
+			<item value="BR_ID"/>
+			<item value="SR"/>
+			<item value="EP_ID"/>
+			<item value="BR_BRAKE_SYMBOL"/>
+			<item value="EP_security_protection"/>
+			<item value="CAN_communication_abnormal"/>
+			<item value="force"/>
+			<item value="voidget_pressureuint16_t*pressure"/>
+			<item value="get_pressure"/>
+			<item value="i2c_3_callback"/>
+			<item value="EP_BRAKE_SYMBOL"/>
+			<item value="SCA_Move_Pos"/>
+			<item value="multicore_share_data"/>
+			<item value="BR_alarm_flag"/>
+			<item value="SCA_Open_Actuator"/>
+			<item value="SR_security_protection"/>
+			<item value="motor_power_st"/>
+			<item value="BR_security_protection"/>
+			<item value="manual_control_BR_EP"/>
+			<item value="first_run_flag"/>
+			<item value="delay"/>
+			<item value="process_beep_event"/>
+			<item value="check_step"/>
+			<item value="sys_mode"/>
+			<item value="SR_alarm_flag"/>
+			<item value="beep_cycle2_cnt"/>
+			<item value="beep_service"/>
+			<item value="set_beep"/>
+			<item value="beep_repeat_cnt"/>
+			<item value="AR_security_protection"/>
+			<item value="CAN_CTRL_MSG"/>
+			<item value="CTRL_1_6"/>
+			<item value="robot_move_ctrl_bo_1"/>
+			<item value="ar_infoalarm_code"/>
+			<item value="sr_info"/>
+			<item value="CAN_communication_abnormal_flag"/>
+			<item value="CAN_communication_count"/>
+			<item value="br_info"/>
+			<item value="alarm_code"/>
+			<item value="sr_use"/>
+			<item value="SCA_Write_2"/>
+			<item value="SCA_Handler_List"/>
+			<item value="SCA_HANDLER"/>
+			<item value="SCA_CAN_Msg_Analysis"/>
+			<item value="canMsgAnalysis"/>
+			<item value="CAN_Dispatch"/>
+			<item value="R2dataProcess"/>
+			<item value="CAN_MSG"/>
+			<item value="WarnBitAnaly"/>
+			<item value="Init_IIC"/>
+			<item value="IIC_Read_Byte"/>
+			<item value="power_monitor_init"/>
+			<item value="failure_info"/>
+			<item value="uart8_printf"/>
+		</list>
+	</section>
+	<section name="OptionalMessageDialog.hide.">
+		<item value="0" key="askReindex.detail"/>
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="org.eclipse.cdt.internal.ui.includebrowser.IBViewPart">
+		<item value="false" key="showFolders"/>
+		<item value="false" key="systemFilter"/>
+		<item value="true" key="includedBy"/>
+		<item value="false" key="inactiveFilter"/>
+	</section>
+</section>

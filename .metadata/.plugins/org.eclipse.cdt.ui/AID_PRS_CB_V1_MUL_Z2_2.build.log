@@ -1,0 +1,11 @@
+08:50:19 **** Incremental Build of configuration Debug for project AID_PRS_CB_V1_MUL_Z2_2 ****
+make -j16 all 
+Invoking: Standard S32DS Print Size
+powerpc-eabivle-size --format=berkeley AID_PRS_CB_V1_MUL_Z2_2.elf
+   text	   data	    bss	    dec	    hex	filename
+   9262	    184	   4393	  13839	   360f	AID_PRS_CB_V1_MUL_Z2_2.elf
+Finished building: AID_PRS_CB_V1_MUL_Z2_2.siz
+ 
+
+08:50:20 Build Finished (took 792ms)
+

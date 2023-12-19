@@ -1,0 +1,633 @@
+/**************************************************************************
+ * FILE NAME: $RCSfile: typedefs.h,v $       COPYRIGHT (c) Freescale 2005 *
+ * DESCRIPTION:                                     All Rights Reserved   *
+ * This file defines all of the data types for the Motorola header file.  *
+ *========================================================================*
+ * ORIGINAL AUTHOR: r12110                                                *
+ * $Log: typedefs.h,v $
+ * Revision 1.5 2016/05/23 11:20:19   b47769
+ * Diab compiler compatibility
+ *
+ * Revision 1.4  2008/02/19 11:10:09  b04629
+ * Fixed previous comment.
+ *
+ * Revision 1.3  2008/02/19 11:01:43  b04629
+ * Replaced // comments for MISRA.
+ *
+ * Revision 1.2  2007/11/22 13:18:55  b04629
+ * Removed original author name and replaced with author ID.
+ *
+ * Revision 1.1  2007/03/22 08:55:15  b04629
+ * Imported and updated from MPC55xx Headers Rev 1.9
+ *                                                                        *
+ *                                                                        *
+ **************************************************************************/
+
+#ifndef _TYPEDEFS_H_
+#define _TYPEDEFS_H_
+
+
+#include <stdbool.h>
+#include <cstring>
+#include <stdio.h>
+
+#ifndef NULL
+	#define NULL 0L
+#endif /* NULL */
+
+#if defined (__GNUC__)  /* GCC compiler*/
+#include <stdint.h>
+    /* Short names for volatiles used by header files, based on ISO C standard */
+    typedef volatile int8_t vint8_t;
+    typedef volatile uint8_t vuint8_t;
+
+    typedef volatile int16_t vint16_t;
+    typedef volatile uint16_t vuint16_t;
+
+    typedef volatile int32_t vint32_t;
+    typedef volatile uint32_t vuint32_t;    
+
+#elif defined (__MWERKS__)    /* Metrowerk CodeWarrior */
+    #include <stdint.h>
+
+    /*  Standard typedefs used by header files, based on ISO C standard */
+    typedef volatile int8_t vint8_t;
+    typedef volatile uint8_t vuint8_t;
+
+    typedef volatile int16_t vint16_t;
+    typedef volatile uint16_t vuint16_t;
+
+    typedef volatile int32_t vint32_t;
+    typedef volatile uint32_t vuint32_t;
+
+#elif defined (__ghs__)    /* GreenHills */
+    #include <stdint.h>
+
+    /* Standard typedefs used by header files, based on ISO C standard */
+    typedef volatile int8_t vint8_t;
+    typedef volatile uint8_t vuint8_t;
+
+    typedef volatile int16_t vint16_t;
+    typedef volatile uint16_t vuint16_t;
+
+    typedef volatile int32_t vint32_t;
+    typedef volatile uint32_t vuint32_t;
+#else
+/* This is needed for compilers that don't have a stdint.h file i.e. DIAB */
+
+typedef signed char int8_t;
+typedef unsigned char uint8_t;
+typedef volatile signed char vint8_t;
+typedef volatile unsigned char vuint8_t;
+
+typedef signed short int16_t;
+typedef unsigned short uint16_t;
+typedef volatile signed short vint16_t;
+typedef volatile unsigned short vuint16_t;
+
+typedef signed long int32_t;
+typedef unsigned long uint32_t;
+typedef volatile signed long vint32_t;
+typedef volatile unsigned long vuint32_t;
+
+/* 8-byte Extended type, supported by DIAB */
+typedef long long int64_t;
+typedef unsigned long long uint64_t;
+
+#endif
+
+#define ABS(x) 		((x)>=0?(x):-(x))
+
+typedef enum
+{
+	CMD_OK,							/* 命令成功 */
+	CMD_FAIL,						/* 命令失败 */
+	CMD_UNSUPPORTED,				/* 命令不支持 */
+	CMD_BCC_ERR						/* 命令BCC校验错误 */
+}CMD_RESULT;
+
+typedef enum
+{
+	CMD_REASON_INVALID,				/* 无效 */
+}CMD_REASON;
+
+typedef enum
+{
+	SYS_MODE_INVALID,				/* 无效模式 */
+	SYS_MODE_SELF_CHECK,			/* 自检模式 */
+	SYS_MODE_MANUAL,				/* 手动模式 */
+	SYS_MODE_AUTO,					/* 自动模式 */
+	SYS_MODE_SAFE,					/* 安全模式 */
+	SYS_MODE_FAULT,					/* 故障模式 */
+}SYS_MODE;
+
+typedef enum
+{
+	SR_F = 1,						/* 转向传感器力 */
+	BR_F,							/* 制动传感器力 */
+	AR_F,							/* 加速传感器力 */
+	EP_F,							/* 驻车制动传感器力 */
+}SENSOR_ID;
+
+typedef struct
+{
+	unsigned int std_id;			/* 帧ID */
+	bool rtr;						/* 远程帧 */
+	unsigned char data[8];			/* 数据 */
+	unsigned char length;			/* 长度 */
+	unsigned char prty;				/* 优先级 */
+}CAN_MSG;
+
+typedef struct
+{
+    unsigned char rx_data[50];		/* 接收数据 */
+    unsigned char rx_length;		/* 接收数据长度 */
+    signed char rx_index;			/* 接收数据索引 */
+    unsigned char rx_frame_timeout;	/* 接收数据帧超时 */
+    unsigned char tx_data[50];		/* 发送数据 */
+    unsigned char tx_length;		/* 发送数据长度 */
+    unsigned char tx_index;			/* 发送数据索引 */
+    bool tx_flag;					/* 发送标志 */
+}SCI_MSG, *SCI_MSG_p;
+
+typedef struct
+{
+	unsigned char base_1ms_cnt;
+	bool base_1ms_flag;
+	unsigned char base_5ms_cnt;
+	bool base_5ms_flag;
+	unsigned char base_10ms_cnt;
+	bool base_10ms_flag;
+	unsigned char base_20ms_cnt;
+	bool base_20ms_flag;
+	unsigned int base_40ms_cnt;
+	bool base_40ms_flag;
+	unsigned int base_50ms_cnt;
+	bool base_50ms_flag;
+	unsigned int base_100ms_cnt;
+	bool base_100ms_flag;
+	unsigned int base_125ms_cnt;
+	bool base_125ms_flag;
+	unsigned int base_200ms_cnt;
+	bool base_200ms_flag;
+	unsigned int base_250ms_cnt;
+	bool base_250ms_flag;
+	unsigned int base_500ms_cnt;
+	bool base_500ms_flag;
+	unsigned int base_1000ms_cnt;
+	bool base_1000ms_flag;
+}SYSTEM_TIME;
+
+typedef struct
+{
+	unsigned int base_100us_cnt;
+	bool base_100us_flag;
+	unsigned int base_1ms_cnt;
+	unsigned char base_1ms_flag_cnt;
+	bool base_1ms_flag;
+}DELAY_TIME;
+
+typedef struct
+{
+	float voltage_in;				/* 输入电压 */
+	float current_in;				/* 输入电流 */
+	float power_in;					/* 输入功率 */
+}POWER_INFO;
+
+typedef union
+{
+	uint16_t r;
+	struct
+	{
+		uint8_t resv1		:6;		/* 保留 */
+		uint8_t hmi_use		:1;		/* 显示屏使用状态： 0-关闭  1-使用 */
+		uint8_t ep_use		:1;		/* 驻车电机使用状态：0-关闭  1-使用  */
+		uint8_t br_use		:1;		/* 制动电机使用状态：0-关闭  1-使用 */
+		uint8_t ar_use		:1;		/* 油门电机使用状态：0-关闭  1-使用  */
+		uint8_t sr_use 		:1;		/* 转向电机使用状态：0-关闭  1-使用 */
+
+		uint8_t ep_infoSwitch		:1;		/* 驻车电机信息上传开关：0-关闭  1-开启  */
+		uint8_t br_infoSwitch		:1;		/* 制动电机信息上传开关：0-关闭  1-开启 */
+		uint8_t ar_infoSwitch		:1;		/* 油门电机信息上传开关：0-关闭  1-开启  */
+		uint8_t sr_infoSwitch 		:1;		/* 转向电机信息上传开关：0-关闭  1-开启 */
+		uint8_t brar_ratioSwitch	:1;		/* 制动、油门百分比上传开关：0-关闭  1-开启 */
+	}b;
+}REGISTER_INFO;
+
+typedef struct
+{
+	char name[12];					/* 设备名称 */
+	char model[12];					/* 设备型号 */
+	uint32_t hardware_ver;			/* 硬件版本 */
+	uint32_t firmware_ver;			/* 固件版本 */
+	uint32_t serial_num;			/* 序列号 */
+	uint32_t device_id;				/* 设备ID */
+}DEVICE_INFO;
+
+typedef union
+{
+	uint16_t r;
+	struct
+	{
+		uint8_t resv1			:1;	/* 保留 */
+		uint8_t change_mode_st	:1; /* 模式切换标记 */
+		uint8_t position_st		:2;	/* 位置：0-抬起 1-踩下 2-中间位置(仅EP) */
+		uint8_t power_st		:2;	/* 供电状态：0-正常 1-未供电 2-异常 3-保留 */
+		uint8_t auto_ctrl_st	:1;	/* 自控状态：0-未激活  1-已激活 */
+		uint8_t self_check_st	:1;	/* 上电自检结果：0-失败  1-成功*/
+
+		uint8_t motor_ctrl_mode	:4;	/* 控制模式：1-电流  2-速度  6-位置梯形  7-速度梯形 */
+		uint8_t motor_limit_st	:1;	/* 限位状态：0-关闭  1-开启 */
+		uint8_t motor_power_st	:1;	/* 开机状态：0-关机  1-开机 */
+		uint8_t motor_online_st	:1;	/* 在线状态：0-离线  1-在线 */
+	}b;
+}ROBOT_STATE;
+
+typedef struct
+{
+	ROBOT_STATE robot_st;			/* 机器人状态 */
+
+	// 状态数据
+	int16_t angle;					/* 当前角度值，单位0.1° */
+	uint16_t encoder_value;			/* 编码器值(仅EP) */
+	uint16_t alarm_code;			/* 报警码 */
+
+	uint16_t limit_time_count;		/* 辅助变量 */
+
+	float power;					/* 当前功率，单位 W */
+	float voltage;					/* 当前电压，单位 V */
+	float current;					/* 当前电流，单位 A */
+	float speed;					/* 当前转速，单位 RPM */
+	float temperature;				/* 当前温度，单位 ℃  */
+	float torque;					/* 当前力矩，current * Torque_Factor 单位 Nm  */
+	/******************************* HMI相关数据  *******************************/
+	// 标定
+	uint8_t hmi_cali_flag;			/* 0-不标定  1-标定 */
+	// SR、BR、AR
+	uint8_t hmi_cali_type;			/* 0-极左 1-零点  2-最大行程(极右) */
+	int16_t hmi_top_pos;			/* 上止点(极左)，单位 ° */
+	int16_t hmi_zero_pos;			/* 零点，单位 ° */
+	int16_t hmi_bottom_pos;			/* 下止点(极右)，单位 ° */
+	// EP
+	uint8_t hmi_encoder_limit;		/* 0-不请求 1-标定上限位点 2-标定下限位点 */
+	uint16_t hmi_max_current;		/* 最大电流 */
+	uint16_t hmi_max_acc_dec;		/* 最大加减速度 */
+	uint16_t hmi_max_speed;			/* 最大转速 */
+
+	// 调试
+	uint8_t hmi_debug_flag;			/* 0-不调试  1-调试 */
+	int16_t hmi_debug_angle;		/* 调试角度 */
+	/******************************* HMI相关数据  *******************************/
+}ROBOT_INFO;
+
+typedef union
+{
+	uint32_t r;
+	struct
+	{
+		uint32_t resv5			:8;	/* 保留 */
+
+		uint32_t resv4			:1;	/* 保留 */
+		uint32_t estop_st		:2;	/* 急停状态：0-无急停  1-ESTOP激活 2-EBR激活 */
+		uint32_t take_over_st	:1;	/* 接管状态：0-未接管 1-已接管 */
+		uint32_t resv3			:4;
+
+		uint32_t auto_driving_st:2; /* 自动驾驶状态：0-预备 1-启动 2-停止 3-急停 */
+		uint32_t sys_ctrl_st	:2; /* 系统控制状态：0-未激活 1-CTRL1使能 2-CTRL2使能 3-保留 */
+		uint32_t resv2			:1; /* 保留 */
+		uint32_t sys_mode		:3; /* 系统模式：1-自检 2-手动 3-自动 4-安全 5-故障 */
+
+		uint32_t resv1			:7;	/* 保留 */
+		uint32_t self_check_st	:1;	/* 自检状态：0-正在自检 1-自检完成 */
+	}b;
+}SYS_STATE;
+
+typedef union
+{
+	uint16_t r;
+	struct
+	{
+		uint16_t ep_motor		:2; /* 驻车机器人异常：0-正常 1-离线 2-报警 3-保留 */
+		uint16_t ar_motor		:2; /* 加速机器人异常：0-正常 1-离线 2-报警 3-保留 */
+		uint16_t br_motor		:2; /* 制动机器人异常：0-正常 1-离线 2-报警 3-保留 */
+		uint16_t sr_motor		:2;	/* 转向机器人异常：0-正常 1-离线 2-报警 3-保留 */
+
+		uint16_t resv1			:2;
+		uint16_t ebr			:1; /* EBR异常：0-正常 1-异常 */
+		uint16_t encoder		:1; /* 编码器异常：0-正常 1-异常 */
+		uint16_t hmi			:1; /* HMI异常：0-正常 1-异常 */
+		uint16_t power			:1; /* 系统供电异常：0-正常 1-异常 */
+		uint16_t sys_ctrl		:2;	/* 系统控制异常：0-正常 1-丢失CTRL1 2-丢失CTRL2 3-丢失CTRL1、CTRL2 */
+	}b;
+}SYS_FAULT;
+
+typedef struct
+{
+	uint8_t check_step;				/* 自检步骤,0-无，1-重启 */
+	uint8_t check_state;   			/* 自检状态 ,0-未自检，1-自检完成 */
+	uint8_t in_power_state;     	/* 外部供电状态：0-异常  1-正常  */
+	uint8_t last_motor_power_state; /* 上次电机供电状态：0-掉电  1-正常 */
+	uint8_t	motor_power_state;  	/* 电机供电状态：0-掉电  1-正常 */
+	uint8_t ep_state;				/* 驻车状态：0-掉电  1-正常  >1-自检失败 */
+	uint8_t br_state;				/* 制动状态：0-掉电  1-正常  >1-自检失败 */
+	uint8_t ar_state;				/* 加速状态：0-掉电  1-正常  >1-自检失败 */
+	uint8_t sr_state;				/* 转向状态：0-掉电  1-正常  >1-自检失败 */
+	uint8_t encoder_state;      	/* 编码器状态：0-异常  1-正常 */
+	uint8_t hmi_state;          	/* 彩屏状态：0-异常  1-正常 */
+	uint8_t retry_count;			/* 重试计数 */
+	uint16_t time_count;         	/* 时间计数 */
+	uint32_t failure_info;			/* 故障信息 */
+}CHECK_INFO;
+
+typedef struct
+{
+	SYS_STATE sys_st;				/* 系统状态 */
+	SYS_FAULT sys_fault;			/* 系统故障 */
+
+	float power;					/* 当前功率，单位 W */
+	float voltage;					/* 当前电压，单位 V */
+	float current;					/* 当前电流，单位 A */
+
+	/******************************* HMI相关数据  *******************************/
+	uint8_t enter_cali_flag;		/* 进入标定标志：0-无效 1-进入 */
+	uint8_t exit_cali_flag;			/* 退出标定标志：0-无效 1-退出 */
+	uint8_t enter_debug_flag;		/* 进入调试标志：0-无效 1-进入 */
+	uint8_t exit_debug_flag;		/* 退出调试标志：0-无效 1-退出 */
+	/******************************* HMI相关数据  *******************************/
+}SYS_INFO;
+
+typedef struct
+{
+	int32_t sr_left_angle;			/* 转向机器人极左位置角度 */
+	int32_t sr_right_angle; 		/* 转向机器人极右位置角度 */
+	int32_t br_max_angle;			/* 制动机器人最大行程角度 */
+	int32_t br_min_angle;			/* 制动机器人最小行程角度 */
+	int32_t ar_max_angle;			/* 加速机器人最大行程角度 */
+	int32_t ar_min_angle;			/* 加速机器人最小行程角度 */
+	int32_t ep_max_angle;			/* 驻车机器人最大行程角度 */
+	int32_t ep_min_angle;			/* 驻车机器人最小行程角度 */
+
+	int32_t sr_acc_dec;				/* 转向机器人加减速度 */
+	int32_t br_speed;				/* 制动机器人转速 */
+	int32_t br_acc_dec;				/* 制动机器人加减速度 */
+	int32_t ar_speed;				/* 加速机器人转速 */
+	int32_t ar_acc_dec;				/* 加速机器人加减速度 */
+
+	int32_t ep_encoder_up;			/* 驻车机器人编码器上限位值 */
+	int32_t ep_encoder_down;		/* 驻车机器人编码器下限位值 */
+
+	bool sr_left_angle_valid;		/* 转向机器人极左位置角度有效性 */
+	bool sr_right_angle_valid;		/* 转向机器人极右位置角度有效性 */
+	bool br_max_angle_valid;		/* 制动机器人最大行程角度有效性 */
+	bool ar_max_angle_valid;		/* 加速机器人最大行程角度有效性 */
+	bool ep_max_angle_valid;		/* 驻车机器人最大行程角度有效性 */
+
+	bool sr_acc_dec_valid;			/* 转向机器人加减速度有效性 */
+	bool br_speed_valid;			/* 制动机器人转速有效性 */
+	bool br_acc_dec_valid;			/* 制动机器人加减速度有效性 */
+	bool ar_speed_valid;			/* 加速机器人转速有效性 */
+	bool ar_acc_dec_valid;			/* 加速机器人加减速度有效性 */
+
+	bool ep_encoder_up_valid;		/* 驻车机器人编码器上限位值有效性 */
+	bool ep_encoder_down_valid;		/* 驻车机器人编码器下限位值有效性 */
+
+	bool ep_zero_valid  ;
+	bool br_zero_valid  ;
+}CALI_DATA;
+
+typedef struct
+{
+	REGISTER_INFO register_info;	/* 注册数据 */
+	CALI_DATA cali_data;			/* 标定数据 */
+}CONFIG_DATA;
+
+typedef struct
+{
+	int16_t	SR;						/* 转向力 */
+	int16_t	BR;						/* 制动力 */
+	int16_t	AR;						/* 加速力 */
+	int16_t	EP;						/* 驻车制动力 */
+}PEDAL_FORCE;
+
+typedef struct
+{
+	SYS_INFO sys_info;				/* 系统信息 */
+	CHECK_INFO check_info;      	/* 自检信息 */
+	ROBOT_INFO sr_info;				/* 转向机器人信息 */
+	ROBOT_INFO ar_info;				/* 加速机器人信息 */
+	ROBOT_INFO br_info;				/* 减速机器人信息 */
+	ROBOT_INFO ep_info;				/* 驻车机器人信息 */
+	CONFIG_DATA config_data;		/* 配置信息 */
+	DEVICE_INFO device_info;		/* 设备信息 */
+	POWER_INFO pwr_msg;		    	/* 供电信息 */
+	PEDAL_FORCE force;				/* 踏板力传感器信息 */
+}SHARED_DATA;
+
+typedef struct
+{
+	/********************************* CTRL_0 *********************************/
+	/* CTRL_0_1(0x101) 机器人限制标定 */
+	bool robot_limit_cali_bo;		/* 机器人限制标定指令接收标志 */
+	uint8_t limit_retry_count;		/* 辅助变量 */
+	uint16_t limit_time_count;		/* 辅助变量 */
+	uint8_t sr_limit_cali_req;		/* 转向机器人限位标定请求：0-不 1-零点 2-极左 3-极右 */
+	uint8_t br_limit_cali_req;		/* 制动机器人限位标定请求：0-不 1-标定最大行程 */
+	uint8_t ar_limit_cali_req;		/* 加速机器人限位标定请求：0-不 1-标定最大行程 */
+	uint8_t ep_limit_cali_req;		/* 驻车机器人限位标定请求：0-不 1-标定最大行程 */
+	uint8_t ep_encoder_cali_req;	/* 驻车机器人编码器限位标定请求：0-不 1-上 2-下 */
+	uint8_t live_counter_ctrl_0_1;	/* CTRL_0_1生命信号 */
+
+	/* CTRL_0_2(0x102) 机器人运动参数标定 */
+	bool robot_param_cali_bo;		/* 机器人运动参数标定指令接收标志 */
+	uint8_t sr_param_cali_req;		/* 转向机器人参数标定请求：0-不 1-标定 */
+	uint8_t br_param_cali_req;		/* 制动机器人参数标定请求：0-不 1-标定 */
+	uint8_t ar_param_cali_req;		/* 加速机器人参数标定请求：0-不 1-标定 */
+	uint16_t sr_acc_dec_cali;		/* 转向机器人加减速度 */
+	uint16_t br_speed_cali;			/* 制动机器人转速 */
+	uint16_t br_acc_dec_cali;		/* 制动机器人加减速度 */
+	uint16_t ar_speed_cali;			/* 加速机器人转速 */
+	uint16_t ar_acc_dec_cali;		/* 加速机器人加减速度 */
+	uint16_t ep_speed_cali;			/* 驻车机器人转速 */
+	uint16_t ep_acc_dec_cali;		/* 驻车机器人加减速度 */
+	uint8_t live_counter_ctrl_0_2;	/* CTRL_0_2生命信号 */
+
+	/* CTRL_0_3(0x103) 标定数据查询 */
+	bool cali_data_query_bo;		/* 机器人标定数据查询指令接收标志 */
+	uint8_t cali_data_query_req;	/* 标定数据查询请求：0-不 1-请求查询 */
+	uint8_t live_counter_ctrl_0_3;	/* CTRL_0_3生命信号 */
+
+	/* CTRL_0_4(0x104) 机器人电机状态查询 */
+	bool motor_info_query_bo;		/* 机器人电机状态查询指令接收标志 */
+	uint8_t motor_info_query_req;	/* 机器人电机数据查询请求：0-不 1-SR 2-BR 3-AR 4-EP */
+	uint8_t motor_voltage_query_req;/* 机器人电压查询请求：0-不 1-查询 */
+	uint8_t motor_current_query_req;/* 机器人电流查询请求：0-不 1-查询 */
+	uint8_t motor_speed_query_req;	/* 机器人转速查询请求：0-无效 1-查询 */
+	uint8_t motor_pos_query_req;	/* 机器人位置查询请求：0-无效 1-查询 */
+	uint8_t motor_temp_query_req;	/* 机器人温度查询请求：0-无效 1-查询 */
+	uint8_t motor_pos_max_query_req;/* 机器人位置上限查询请求：0-无效 1-查询 */
+	uint8_t motor_pos_min_query_req;/* 机器人位置下限查询请求：0-无效 1-查询 */
+	uint8_t live_counter_ctrl_0_4;	/* CTRL_0_4生命信号 */
+
+	/* CTRL_0_5(0x105) 设置设备信息 */
+	bool device_info_set_bo;		/* 设备信息设置指令接收标志 */
+	uint32_t serial_number;			/* 序列号 */
+	uint16_t device_id;				/* 设备ID*/
+	uint8_t hardware_version;		/* 硬件版本 */
+	uint8_t live_counter_ctrl_0_5;	/* CTRL_0_5生命信号 */
+
+	/* CTRL_0_6(0x106) 设备信息查询 */
+	bool device_info_query_bo;		/* 设备信息查询指令接收标志 */
+	uint8_t device_info_query_req;	/* 设备信息查询请求：0-无效 1-请求查询 */
+	uint8_t live_counter_ctrl_0_6;	/* CTRL_0_6生命信号 */
+
+	/* CTRL_0_7(0x107) 标定数据清除 */
+	bool cali_data_clear_bo;		/* 标定数据清除指令接收标志 */
+	uint8_t cali_data_clear_req;	/* 标定数据清除请求：0-无效 1-请求清除 */
+	uint8_t live_counter_ctrl_0_7;	/* CTRL_0_7生命信号 */
+
+	/* CTRL_0_8(0x108) 机器人禁用控制 */
+	bool robot_disable_bo;			/* 机器人禁用控制指令接收标志 */
+	uint8_t sr_disable_req;			/* 转向机器人禁用请求：0-不禁用 1-禁用 */
+	uint8_t br_disable_req;			/* 制动机器人禁用请求：0-不禁用 1-禁用 */
+	uint8_t ar_disable_req;			/* 加速机器人禁用请求：0-不禁用 1-禁用 */
+	uint8_t ep_disable_req;			/* 驻车机器人禁用请求：0-不禁用 1-禁用 */
+	uint8_t live_counter_ctrl_0_8;	/* CTRL_0_8生命信号 */
+
+	/* CTRL_0_9(0x109) 机器人电机故障清除 */
+	bool motor_clearERR_bo;			/* 电机清除故障指令接收标志 */
+	uint8_t sr_clearERR_req;		/* 转向电机故障清除请求：0-不请求 1-请求 */
+	uint8_t br_clearERR_req;		/* 制动电机故障清除请求：0-不请求 1-请求 */
+	uint8_t ar_clearERR_req;		/* 加速电机故障清除请求：0-不请求 1-请求 */
+	uint8_t ep_clearERR_req;		/* 驻车电机故障清除请求：0-不请求 1-请求 */
+	uint8_t live_counter_ctrl_0_9;	/* CTRL_0_9生命信号 */
+
+	/* CTRL_0_A(0x10A) 机器人信息上传开关控制 */
+	bool robot_infoSwitch_bo;			/* 机器人禁用控制指令接收标志 */
+	uint8_t sr_infoSwitch_req;			/* 转向机器人信息上传开关：0-关 1-开 */
+	uint8_t br_infoSwitch_req;			/* 制动机器人信息上传开关：0-关 1-开 */
+	uint8_t ar_infoSwitch_req;			/* 加速机器人信息上传开关：0-关 1-开 */
+	uint8_t ep_infoSwitch_req;			/* 驻车机器人信息上传开关：0-关 1-开 */
+	uint8_t brar_ratioSwitch_req;		/* 制动、加速机器人百分比上传开关：0-关 1-开 */
+	uint8_t live_counter_ctrl_0_A;		/* CTRL_0_A生命信号 */
+	/********************************* CTRL_0 *********************************/
+
+	/********************************* CTRL1_1 ********************************/
+	/* CTRL1_1_1(0x111) 机器人开闭控制 */
+	bool robot_open_ctrl_bo_1;		/* 机器人开闭控制指令接收标志 */
+	uint8_t sr_open_ctrl_req_1;		/* 转向机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t br_open_ctrl_req_1;		/* 制动机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ar_open_ctrl_req_1;		/* 加速机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ep_open_ctrl_req_1;		/* 驻车机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t live_counter_ctrl1_1_1;	/* CTRL1_1_1生命信号 */
+
+	/* CTRL1_1_2(0x112) 机器人模式控制 */
+	bool robot_mode_ctrl_bo_1;		/* 机器人模式控制指令接收标志 */
+	uint8_t sr_mode_ctrl_req_1;		/* 转向机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t br_mode_ctrl_req_1;		/* 制动机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ar_mode_ctrl_req_1;		/* 加速机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ep_mode_ctrl_req_1;		/* 驻车机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t live_counter_ctrl1_1_2;	/* CTRL1_1_2生命信号 */
+
+	/* CTRL1_1_3(0x113) 机器人运动控制 */
+	bool robot_move_ctrl_bo_1;		/* 机器人运动控制指令接收标志 */
+	uint8_t auto_driving_ctrl_1;	/* 自动驾驶控制：0-无效 1-启动 2-停止 3-急停 */
+	uint8_t ep_request_st_1;		/* 驻车请求状态：0-无请求  1-请求 */
+	uint8_t sr_request_st_1;		/* 转向机器人运动请求状态：0-不请求 1-请求 */
+	uint8_t sr_angle_sign_1;		/* 转向机器人转角方向：0-无效 1-左 2-右 */
+	uint16_t sr_speed_1;			/* 转向机器人转速 */
+	uint16_t sr_angle_1;			/* 转向机器人转角 */
+	uint16_t br_angle_1;			/* 制动机器人转角 */
+	uint8_t br_request_st_1;		/* 制动机器人运动请求状态：0-不请求 1-请求 */
+	uint8_t ar_request_st_1;		/* 加速机器人运动请求状态：0-不请求 1-请求 */
+	uint16_t ar_angle_1;			/* 加速机器人转角 */
+	uint8_t live_counter_ctrl1_1_3;	/* CTRL1_1_3生命信号 */
+
+	/* CTRL1_1_4(0x114) 详细状态查询 */
+	bool state_detail_query_bo_1;	/* 详细状态查询指令接收标志 */
+	uint8_t state_detail_query_req_1;/* 详细状态查询请求：0-无效 1-请求查询 */
+	uint8_t live_counter_ctrl1_1_4;	/* CTRL1_1_4生命信号 */
+
+	/* CTRL1_1_5(0x115) 供电信息查询 */
+	bool power_query_bo_1;	/* 供电信息查询指令接收标志 */
+	uint8_t power_sys_query_req_1;/* 系统供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_sr_query_req_1;/* 转向供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_br_query_req_1;/* 制动供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_ar_query_req_1;/* 加速供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_ep_query_req_1;/* 驻车供电查询请求：0-无效 1-请求查询 */
+	uint8_t live_counter_ctrl1_1_5;	/* CTRL1_1_5生命信号 */
+
+	/* CTRL1_1_6(0x116) 自动驾驶控制选择 */
+	bool ctrl_auto_driver_control_bo_1;	/* 自动驾驶控制 */
+	uint8_t auto_driver_ctrl_1;			/* CTRL控制标志：0-人工模式 1-自动驾驶 */
+	uint8_t live_counter_ctrl1_1_6;		/* CTRL1_1_6生命信号 */
+
+	/*  CTRL1_1_7  新增117协议控制EP,BR 正反转操作*/
+	 bool CTRL1_HandDrivingCtrl ;
+	 bool CTRL1_EP_DIRECTION ;
+	 bool CTRL1_BR_DIRECTION ;
+	 uint16_t  CTRL1_HAND_EP_Angle ;
+	 uint16_t  CTRL1_HAND_BR_Angle ;
+
+	/********************************* CTRL1_1 ********************************/
+
+	/********************************* CTRL2_1 ********************************/
+	/* CTRL2_1_1(0x121) 机器人开闭控制 */
+	bool robot_open_ctrl_bo_2;		/* 机器人开闭控制指令接收标志 */
+	uint8_t sr_open_ctrl_req_2;		/* 转向机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t br_open_ctrl_req_2;		/* 制动机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ar_open_ctrl_req_2;		/* 加速机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ep_open_ctrl_req_2;		/* 驻车机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t live_counter_ctrl2_1_1;	/* CTRL2_1_1生命信号 */
+
+	/* CTRL2_1_2(0x122) 机器人模式控制 */
+	bool robot_mode_ctrl_bo_2;		/* 机器人模式控制指令接收标志 */
+	uint8_t sr_mode_ctrl_req_2;		/* 转向机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t br_mode_ctrl_req_2;		/* 制动机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ar_mode_ctrl_req_2;		/* 加速机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t ep_mode_ctrl_req_2;		/* 驻车机器人开闭请求：0-无效 1-关闭 2-开启 */
+	uint8_t live_counter_ctrl2_1_2;	/* CTRL2_1_2生命信号 */
+
+	/* CTRL2_1_3(0x123) 机器人运动控制 */
+	bool robot_move_ctrl_bo_2;		/* 机器人运动控制指令接收标志 */
+	uint8_t auto_driving_ctrl_2;	/* 自动驾驶控制：0-无效 1-启动 2-停止 3-急停 */
+	uint8_t ep_request_st_2;		/* 驻车请求状态：0-无请求  1-请求 */
+	uint8_t sr_request_st_2;		/* 转向机器人运动请求状态：0-不请求 1-请求 */
+	uint8_t sr_angle_sign_2;		/* 转向机器人转角方向：0-无效 1-左 2-右 */
+	uint16_t sr_speed_2;			/* 转向机器人转速 */
+	uint16_t sr_angle_2;			/* 转向机器人转角 */
+	uint16_t br_angle_2;			/* 制动机器人转角 */
+	uint8_t br_request_st_2;		/* 制动机器人运动请求状态：0-不请求 1-请求 */
+	uint8_t ar_request_st_2;		/* 加速机器人运动请求状态：0-不请求 1-请求 */
+	uint16_t ar_angle_2;			/* 加速机器人转角 */
+	uint8_t live_counter_ctrl2_1_3;	/* CTRL2_1_3生命信号 */
+
+	/* CTRL2_1_4(0x124) 详细状态查询 */
+	bool state_detail_query_bo_2;	/* 详细状态查询指令接收标志 */
+	uint8_t state_detail_query_req_2;/* 详细状态查询请求：0-无效 1-请求查询 */
+	uint8_t live_counter_ctrl2_1_4;	/* CTRL2_1_4生命信号 */
+
+	/* CTRL2_1_5(0x125) 供电信息查询 */
+	bool power_query_bo_2;	/* 供电信息查询指令接收标志 */
+	uint8_t power_sys_query_req_2;/* 系统供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_sr_query_req_2;/* 转向供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_br_query_req_2;/* 制动供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_ar_query_req_2;/* 加速供电查询请求：0-无效 1-请求查询 */
+	uint8_t power_ep_query_req_2;/* 驻车供电查询请求：0-无效 1-请求查询 */
+	uint8_t live_counter_ctrl2_1_5;	/* CTRL1_1_5生命信号 */
+
+	/* CTRL2_1_6(0x126) 自动驾驶控制选择 */
+	bool ctrl_auto_driver_control_bo_2;	/* 自动驾驶控制 */
+	uint8_t auto_driver_ctrl_2;			/* CTRL控制标志：0-人工模式 1-自动驾驶 */
+	uint8_t live_counter_ctrl2_1_6;		/* CTRL2_1_6生命信号 */
+
+	/* CTRL2_1_7(0x127) 控制通道选择 */
+	bool ctrl_route_set_bo;			/*控制通道选择指令接收标志 */
+	uint8_t ctrl_flag;				/* CTRL控制标志：0-CTRL1 1-CTRL2 2-None */
+	uint8_t live_counter_ctrl2_1_7;	/* CTRL2_1_7生命信号 */
+	/********************************* CTRL2_1 ********************************/
+
+
+
+}CAN_CTRL_MSG;
+
+#endif
